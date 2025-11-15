@@ -224,13 +224,11 @@ def generate_and_save_images(character_name):
     # 获取当前角色的表情数量
     emotion_count = mahoshojo[character_name]["emotion_count"]
 
+    for filename in os.listdir(magic_cut_folder):
+        if filename.startswith(character_name):
+            return
     for i in range(16):     
         for j in range(emotion_count):
-            if character_name == "sherri":
-        # 遍历魔裁文件夹，检查是否存在雪莉图片
-                for filename in os.listdir(magic_cut_folder):
-                    if filename.startswith("sherri"):
-                        return
                 # 使用绝对路径加载背景图片和角色图片
             background_path = os.path.join(now_file, "background", f"c{i+1}.png")
             overlay_path = os.path.join(now_file, character_name, f"{character_name} ({j+1}).png")
@@ -491,15 +489,15 @@ def Start():
 
 # 角色切换快捷键绑定
 # 按Ctrl+1 到 Ctrl+9: 切换角色1-9
-for i in range(9):
+for i in range(1,10):
     keyboard.add_hotkey(f'ctrl+{i}', lambda idx=i: switch_character(idx))
 
 # 角色10-13使用特殊快捷键
-keyboard.add_hotkey('ctrl+q', lambda: switch_character(9))   # 角色10
-keyboard.add_hotkey('ctrl+w', lambda: switch_character(10))  # 角色11
-keyboard.add_hotkey('ctrl+e', lambda: switch_character(11))  # 角色12
-keyboard.add_hotkey('ctrl+r', lambda: switch_character(12))  # 角色13
-keyboard.add_hotkey('ctrl+t', lambda: switch_character(13)) 
+keyboard.add_hotkey('ctrl+q', lambda: switch_character(10))   # 角色10
+keyboard.add_hotkey('ctrl+w', lambda: switch_character(11))  # 角色11
+keyboard.add_hotkey('ctrl+e', lambda: switch_character(12))  # 角色12
+keyboard.add_hotkey('ctrl+r', lambda: switch_character(13))  # 角色13
+keyboard.add_hotkey('ctrl+t', lambda: switch_character(0)) 
 keyboard.add_hotkey('Tab', lambda: delate(magic_cut_folder))
 # 绑定 Ctrl+Alt+H 作为全局热键
 ok=keyboard.add_hotkey(HOTKEY,Start, suppress=BLOCK_HOTKEY or HOTKEY==SEND_HOTKEY)
