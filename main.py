@@ -32,8 +32,8 @@ Tab: 清除图片
       
 程序说明：
 这个版本的程序占用体积较小，但是需要预加载，初次更换角色后需要等待数秒才能正常使用，望周知（
-按Tab可清除生成图片，降低占用空间
-另外一个版本正在整理，不过需要额外下载每个角色对应的图包，感谢各位的支持
+按Tab可清除生成图片，降低占用空间，但清除图片后需重启才能正常使用
+感谢各位的支持
 
 
 """
@@ -214,7 +214,7 @@ def get_current_emotion_count():
 
 def delate(folder_path, quality=85):
     for filename in os.listdir(folder_path):
-        if filename.lower().endswith('.jpg') and filename.startswith("sherri") is False:
+        if filename.lower().endswith('.jpg'):
             os.remove(folder_path+"\\"+filename)
          
 
