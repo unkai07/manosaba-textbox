@@ -26,6 +26,7 @@ Ctrl+e: 切换角色12
 Ctrl+r: 切换角色13
 Ctrl+t: 切换角色14
 Ctrl+0: 显示当前角色
+Alt+1-9: 切换表情1-9(部分角色表情较少 望大家谅解)
 Enter: 生成图片
 Esc: 退出程序
 Tab: 清除图片
@@ -74,7 +75,7 @@ from image_fit_paste import paste_image_auto
 
 i = -1
 value_1 = -1
-
+expression = None
 
 # 角色配置字典
 mahoshojo = {
@@ -220,7 +221,6 @@ def delate(folder_path, quality=85):
 
 def generate_and_save_images(character_name):
     now_file = os.path.dirname(os.path.abspath(__file__))
-    print("正在加载")
     
     # 获取当前角色的表情数量
     emotion_count = mahoshojo[character_name]["emotion_count"]
@@ -228,6 +228,7 @@ def generate_and_save_images(character_name):
     for filename in os.listdir(magic_cut_folder):
         if filename.startswith(character_name):
             return
+    print("正在加载")
     for i in range(16):     
         for j in range(emotion_count):
                 # 使用绝对路径加载背景图片和角色图片
@@ -272,14 +273,28 @@ show_current_character()
 # 测试：生成当前角色的图片
 generate_and_save_images(get_current_character())
 
+def get_expression(i):
+    global expression
+    character_name = get_current_character()
+    if i <= mahoshojo[character_name]["emotion_count"]:
+        print(f"已切换至第{i}个表情")
+        expression = i
+
+
 # 随机获取表情图片名称
 # 优化版本：使用循环替代递归，避免栈溢出风险
 # 维护上一次选择的表情类型，确保不连续选择相同表情
 def get_random_value():
-    global value_1
+    global value_1,expression
     character_name = get_current_character()
     emotion_count = get_current_emotion_count()
     total_images = 16 * emotion_count
+    
+    if expression:
+        i = random.randint((expression-1)*16+1,expression*16)
+        value_1 = i
+        expression = None
+        return f"{character_name} ({i})"
     
     
     # 循环直到找到与上次不同表情的图片
@@ -412,7 +427,7 @@ def Start():
     character_name = get_current_character()
     address = os.path.join(magic_cut_folder, get_random_value()+".jpg")
     BASEIMAGE_FILE = address
-    print(address)
+    print(character_name,str(1+(value_1//16)),"背景",str(value_1%16))
 
 
 
@@ -501,6 +516,10 @@ keyboard.add_hotkey('ctrl+r', lambda: switch_character(12))  # 角色12
 keyboard.add_hotkey('ctrl+t', lambda: switch_character(13))  # 角色13
 keyboard.add_hotkey('ctrl+y', lambda: switch_character(0)) 
 keyboard.add_hotkey('Tab', lambda: delate(magic_cut_folder))
+
+for i in range(1,10):
+    keyboard.add_hotkey(f'alt+{i}', lambda idx=i: get_expression(idx))
+
 # 绑定 Ctrl+Alt+H 作为全局热键
 ok=keyboard.add_hotkey(HOTKEY,Start, suppress=BLOCK_HOTKEY or HOTKEY==SEND_HOTKEY)
 
