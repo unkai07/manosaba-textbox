@@ -65,7 +65,7 @@ import time
 import keyboard
 import pyperclip
 import io
-from PIL import Image,ImageDraw,ImageFont
+from PIL import Image
 import win32clipboard
 import os
 import re
