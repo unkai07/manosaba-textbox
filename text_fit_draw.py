@@ -1,6 +1,5 @@
-# filename: text_fit_draw.py
 from io import BytesIO
-from typing import Tuple, Union, Literal
+from typing import Tuple, Union, Literal, Optional
 from PIL import Image, ImageDraw, ImageFont
 import os
 import re
@@ -37,16 +36,15 @@ def compress_image(image: Image.Image) -> Image.Image:
     width, height = image.size
     new_width = int(width * IMAGE_SETTINGS["resize_ratio"])
     new_height = int(height * IMAGE_SETTINGS["resize_ratio"])
-    
-    # 限制最大尺寸
+
     if new_width > IMAGE_SETTINGS["max_width"]:
         ratio = IMAGE_SETTINGS["max_width"] / new_width
         new_width, new_height = IMAGE_SETTINGS["max_width"], int(new_height * ratio)
-    
+
     if new_height > IMAGE_SETTINGS["max_height"]:
         ratio = IMAGE_SETTINGS["max_height"] / new_height
         new_height, new_width = IMAGE_SETTINGS["max_height"], int(new_width * ratio)
-    
+
     return image.resize((new_width, new_height), Image.Resampling.LANCZOS)
 
 def is_emoji(char: str) -> bool:
@@ -75,18 +73,26 @@ def draw_text_auto(
     align: Align = "center",
     valign: VAlign = "middle",
     line_spacing: float = 0.15,
-    bracket_color: Tuple[int, int, int] = (137,177,251),  # 中括号及内部内容颜色
+    bracket_color: Tuple[int, int, int] = (137,177,251),
     image_overlay: Union[str, Image.Image,None]=None,
-    role_name: str = "unknown",  # 添加角色名称参数
-    text_configs_dict: dict = None,  # 添加文字配置字典参数
+    role_name: str = "unknown",
+    text_configs_dict: dict = None,
+
+    # ✅ 新增参数
+    emoji_enabled: bool = True,              # 是否启用 emoji PNG 渲染
+    emoji_download_retries: int = 2,         # emoji 下载重试次数（main 传）
+    emoji_image_dir: str | None = None,      # emoji png目录
+    emoji_scale: float = 1.0,                # emoji 相对字号缩放
+    emoji_download_timeout: float = 6.0,     # 下载超时（可选）
 ) -> bytes:
     """
     在指定矩形内自适应字号绘制文本；
+    emoji_enabled=True 时：emoji 用 PNG inline 彩色贴图（本地无则自动下载并缓存）。
+    emoji_enabled=False 时：所有字符都按普通文字渲染，不下载 emoji。
     中括号及括号内文字使用 bracket_color。
     支持彩色emoji表情显示。
     """
 
-    # --- 1. 打开图像 ---
     if isinstance(image_source, Image.Image):
         img = image_source.copy()
     else:
@@ -111,7 +117,52 @@ def draw_text_auto(
         raise ValueError("无效的文字区域。")
     region_w, region_h = x2 - x1, y2 - y1
 
-    # --- 2. 字体加载 ---
+    # emoji png 默认目录：脚本同级 emoji_png/
+    if emoji_image_dir is None:
+        emoji_image_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "emoji_png")
+
+    emoji_cache: dict[str, Image.Image] = {}
+
+    def _load_emoji_png(cluster: str) -> Optional[Image.Image]:
+        """
+        仅在 emoji_enabled=True 时起作用：
+        本地有 => 读本地
+        本地无 => Twemoji CDN 下载（重试次数由 emoji_download_retries 控制）
+        """
+        if not emoji_enabled:
+            return None
+
+        fn = emoji_cluster_to_filename(cluster)
+        path = os.path.join(emoji_image_dir, fn)
+
+        if path in emoji_cache:
+            return emoji_cache[path]
+
+        if os.path.exists(path):
+            try:
+                im = Image.open(path).convert("RGBA")
+                emoji_cache[path] = im
+                return im
+            except Exception:
+                try:
+                    os.remove(path)
+                except:
+                    pass
+
+        url = TWEMOJI_BASE + fn
+        im = download_emoji_png(
+            url,
+            path,
+            timeout=emoji_download_timeout,
+            retries=max(0, int(emoji_download_retries))
+        )
+        if im is not None:
+            emoji_cache[path] = im
+            return im
+
+        return None
+
+
     def _load_font(size: int) -> ImageFont.FreeTypeFont:
         if font_path and os.path.exists(font_path):
             return ImageFont.truetype(font_path, size=size)
@@ -149,6 +200,7 @@ def draw_text_auto(
                 else:
                     if buf:
                         lines.append(buf)
+
                     if has_space and len(u) > 1:
                         tmp = ""
                         for ch in u:
@@ -181,9 +233,8 @@ def draw_text_auto(
                 lines.append("")
         return lines
 
-    # --- 4. 测量 ---
-    def measure_block(lines: list[str], font: ImageFont.FreeTypeFont) -> tuple[int, int, int]:
-        ascent, descent = font.getmetrics()
+    def measure_block(lines: list[str], font_main: ImageFont.FreeTypeFont):
+        ascent, descent = font_main.getmetrics()
         line_h = int((ascent + descent) * (1 + line_spacing))
         max_w = 0
         
@@ -197,15 +248,16 @@ def draw_text_auto(
         total_h = max(line_h * max(1, len(lines)), 1)
         return max_w, total_h, line_h
 
-    # --- 5. 搜索最大字号 ---
+
+    # ----------- 二分最大字号 -----------
     hi = min(region_h, max_font_height) if max_font_height else region_h
     lo, best_size, best_lines, best_line_h, best_block_h = 1, 0, [], 0, 0
 
     while lo <= hi:
         mid = (lo + hi) // 2
-        font = _load_font(mid)
-        lines = wrap_lines(text, font, region_w)
-        w, h, lh = measure_block(lines, font)
+        font_main = _load_font(mid)
+        lines = wrap_lines(text, font_main, region_w)
+        w, h, lh = measure_block(lines, font_main)
         if w <= region_w and h <= region_h:
             best_size, best_lines, best_line_h, best_block_h = mid, lines, lh, h
             lo = mid + 1
@@ -213,25 +265,28 @@ def draw_text_auto(
             hi = mid - 1
 
     if best_size == 0:
-        font = _load_font(1)
-        best_lines = wrap_lines(text, font, region_w)
-        _, best_block_h, best_line_h = 0, 1, 1
+        font_main = _load_font(1)
+        best_lines = wrap_lines(text, font_main, region_w)
+        best_line_h, best_block_h = 1, 1
         best_size = 1
     else:
-        font = _load_font(best_size)
+        font_main = _load_font(best_size)
+
+    em_px = emoji_advance_px(font_main)
+    ascent, descent = font_main.getmetrics()
 
     # --- 6. 解析着色片段 ---
     def parse_color_segments(s: str, in_bracket: bool) -> Tuple[list[tuple[str, Tuple[int, int, int]]], bool]:
         segs: list[tuple[str, Tuple[int, int, int]]] = []
         buf = ""
         for ch in s:
-            if ch == "[" or ch == "【":
+            if ch in ("[", "【"):
                 if buf:
                     segs.append((buf, bracket_color if in_bracket else color))
                     buf = ""
                 segs.append((ch, bracket_color))
                 in_bracket = True
-            elif ch == "]" or ch == "】":
+            elif ch in ("]", "】"):
                 if buf:
                     segs.append((buf, bracket_color))
                     buf = ""
@@ -243,7 +298,7 @@ def draw_text_auto(
             segs.append((buf, bracket_color if in_bracket else color))
         return segs, in_bracket
 
-    # --- 7. 垂直对齐 ---
+    # ----------- 垂直对齐 -----------
     if valign == "top":
         y_start = y1
     elif valign == "middle":
@@ -292,7 +347,8 @@ def draw_text_auto(
         if y - y_start > region_h:
             break
 
-    # 覆盖置顶图层（如果有）
+
+    # 覆盖置顶图层
     if image_overlay is not None and img_overlay is not None:
         img.paste(img_overlay, (0, 0), img_overlay)
     elif image_overlay is not None and img_overlay is None:
@@ -324,5 +380,5 @@ def draw_text_auto(
     
     # --- 9. 输出 PNG ---
     buf = BytesIO()
-    img.save(buf, format="png")
+    img.save(buf, "png")
     return buf.getvalue()
