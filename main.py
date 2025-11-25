@@ -406,19 +406,27 @@ def cut_all_and_get_text() -> str:
     # 清空剪贴板，防止读到旧数据
     pyperclip.copy("")
 
-    # 发送 组合键
+    # 发送 Ctrl+A
     kbd_controller.press(Key.ctrl if PLATFORM != 'darwin' else Key.cmd)
     kbd_controller.press('a')
     kbd_controller.release('a')
+    kbd_controller.release(Key.ctrl if PLATFORM != 'darwin' else Key.cmd)
+    time.sleep(DELAY)
+
+    # 发送 Ctrl+X
+    kbd_controller.press(Key.ctrl if PLATFORM != 'darwin' else Key.cmd)
     kbd_controller.press('x')
     kbd_controller.release('x')
     kbd_controller.release(Key.ctrl if PLATFORM != 'darwin' else Key.cmd)
     time.sleep(DELAY)
 
     # 获取剪切后的内容
-    new_clip = pyperclip.paste()
+    for attempt in range(3):
+        new_clip = pyperclip.paste()
+        if new_clip != "":
+            return new_clip
 
-    return new_clip
+    return ""
 
 def try_get_image() -> Image.Image | None:
     """
@@ -472,8 +480,16 @@ def Start():
 # 文本框右下角坐标 (x, y), 同时适用于图片框
 # 此值为一个二元组, 例如 (100, 150), 单位像素, 图片的左上角记为 (0, 0)
     IMAGE_BOX_BOTTOMRIGHT= (mahoshojo_over[0], mahoshojo_over[1])
-    text=cut_all_and_get_text()
-    image=try_get_image()
+
+    # 先获取文本内容
+    text = cut_all_and_get_text()
+    print(f"Get text: len = {len(text)}, text = {repr(text[:100] if len(text) > 100 else text)}")
+
+    # 再尝试获取图片（仅当没有文本时）
+    image = None
+    if text == "":
+        image = try_get_image()
+        print(f"DEBUG: image = {image}")
 
     if text == "" and image is None:
         print("no text or image")
