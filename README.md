@@ -29,12 +29,12 @@
      ```bash
      python3 -m http.server
      ```
-   - 然后在浏览器访问 `http://localhost:8000/doc/`
+   - 然后在浏览器访问 `http://localhost:8000/docs/`
 
 ### 在线部署
 
 本项目是纯静态网页，可以直接部署到 GitHub Pages、Vercel、Netlify 等平台。
-如果使用 GitHub Pages，请在设置中将 Source 设置为 `/doc` 目录。
+如果使用 GitHub Pages，请在设置中将 Source 设置为 `/docs` 目录。
 
 ## 角色列表
 

@@ -315,7 +315,7 @@ function drawMainText(text) {
     // Auto-size font logic
     // Binary search for best font size
     let minSize = 10;
-    let maxSize = 145;
+    let maxSize = 120;
     let bestSize = minSize;
     let bestLines = [];
 
@@ -338,9 +338,8 @@ function drawMainText(text) {
     ctx.font = `${bestSize}px CustomFont`;
     const lineHeight = bestSize * 1.15;
 
-    // Vertical align middle
-    const totalTextHeight = bestLines.length * lineHeight;
-    let startY = y + (h - totalTextHeight) / 2;
+    // Vertical align top
+    let startY = y + TEXT_BOX_CONFIG.padding;
 
     bestLines.forEach((line, index) => {
         let lineX = x; // Left align
