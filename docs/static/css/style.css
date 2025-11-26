@@ -27,9 +27,29 @@ body {
     padding: 20px;
 }
 
+.github-link {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--text-color);
+    transition: color 0.2s, transform 0.2s;
+    z-index: 100;
+}
+
+.github-link:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.github-link svg {
+    fill: currentColor;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    /* For absolute positioning context if needed, though fixed/absolute to body is better usually, but here inside container is fine if container is relative */
 }
 
 header {
