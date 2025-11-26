@@ -2,12 +2,10 @@
 
 # 🎭魔法少女的魔女裁判文本框生成器 (Web版)
 
-<img width="1200" height="390" alt="preview" src="https://github.com/user-attachments/assets/6fb46a8d-4fc4-4d10-80a0-ed21fbb428bf" />
+<img width="2560" height="834" alt="hiro_1764147282492" src="https://github.com/user-attachments/assets/5567a1b8-ec5f-446c-9a2f-859abc20ea52" />
 
 一个基于 Web 的自动化表情包生成工具，能够快速生成带有自定义文本的魔法少女的魔女裁判文本框图片。
 本项目是 [Text_box-of-mahoushoujo_no_majosaiban](https://github.com/oplivilqo/Text_box-of-mahoushoujo_no_majosaiban) 的纯网页重制版。
-
-[灵感来源与代码参考](https://github.com/MarkCup-Official/Anan-s-Sketchbook-Chat-Box)
 
 </div>
 
@@ -56,3 +54,4 @@
 ## 许可证
 
 本项目基于MIT协议传播，仅供个人学习交流使用，不拥有相关素材的版权。进行分发时应注意不违反素材版权与官方二次创造协定。
+
