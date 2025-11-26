@@ -138,7 +138,7 @@ const trialOptionsList = document.getElementById('trial-options-list');
 const addOptionBtn = document.getElementById('add-option-btn');
 
 // State
-let currentTab = 'textbox';
+let currentTab = localStorage.getItem('currentTab') || 'textbox';
 let currentCharacter = 'sherri'; // Default character
 let currentExpression = 1;
 let currentBackground = 1;
@@ -178,6 +178,18 @@ async function init() {
     addTrialOption(); // Add one default option
 
     // Tab switching
+    // Initialize tabs based on saved state
+    tabs.forEach(t => t.classList.remove('active'));
+    tabContents.forEach(c => c.classList.remove('active'));
+
+    const activeTabBtn = document.querySelector(`.tab-btn[data-tab="${currentTab}"]`);
+    const activeTabContent = document.getElementById(`${currentTab}-controls`);
+
+    if (activeTabBtn && activeTabContent) {
+        activeTabBtn.classList.add('active');
+        activeTabContent.classList.add('active');
+    }
+
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             tabs.forEach(t => t.classList.remove('active'));
@@ -186,6 +198,7 @@ async function init() {
             tab.classList.add('active');
             document.getElementById(`${tab.dataset.tab}-controls`).classList.add('active');
             currentTab = tab.dataset.tab;
+            localStorage.setItem('currentTab', currentTab);
             generateImage();
         });
     });
