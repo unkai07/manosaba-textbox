@@ -115,6 +115,8 @@ const ctx = canvas.getContext('2d');
 const characterSelect = document.getElementById('character-select');
 const expressionSelect = document.getElementById('expression-select');
 const randomExpressionBtn = document.getElementById('random-expression-btn');
+const backgroundSelect = document.getElementById('background-select');
+const randomBackgroundBtn = document.getElementById('random-background-btn');
 const textInput = document.getElementById('text-input');
 const generateBtn = document.getElementById('generate-btn');
 const downloadBtn = document.getElementById('download-btn');
@@ -123,7 +125,7 @@ const loadingIndicator = document.getElementById('loading-indicator');
 // State
 let currentCharacter = 'sherri'; // Default character
 let currentExpression = 1;
-let currentBackground = 1;
+let currentBackground = 'random';
 let fontLoaded = false;
 
 // Initialize
@@ -147,6 +149,14 @@ async function init() {
         characterSelect.appendChild(option);
     }
 
+    // Populate background select
+    for (let i = 1; i <= 16; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = `背景 ${i}`;
+        backgroundSelect.appendChild(option);
+    }
+
     updateExpressionOptions();
 
     // Event listeners
@@ -166,6 +176,19 @@ async function init() {
         const count = CHARACTERS[currentCharacter].emotion_count;
         currentExpression = Math.floor(Math.random() * count) + 1;
         expressionSelect.value = currentExpression;
+        generateImage();
+    });
+
+
+
+    backgroundSelect.addEventListener('change', (e) => {
+        currentBackground = e.target.value;
+        generateImage();
+    });
+
+    randomBackgroundBtn.addEventListener('click', () => {
+        currentBackground = Math.floor(Math.random() * 16) + 1;
+        backgroundSelect.value = currentBackground;
         generateImage();
     });
 
@@ -207,12 +230,12 @@ async function generateImage() {
     downloadBtn.disabled = true;
 
     try {
-        // Random background logic from Python code: img_num = j * 16 + i + 1
-        // Here we just pick a random background from 1 to 16
-        currentBackground = Math.floor(Math.random() * 16) + 1;
+        // Background logic
+        let bgNum;
+        bgNum = parseInt(currentBackground);
 
         // Load images
-        const bgPath = `static/img/background/c${currentBackground}.png`;
+        const bgPath = `static/img/background/c${bgNum}.png`;
         const charPath = `static/img/${currentCharacter}/${currentCharacter} (${currentExpression}).png`;
 
         const [bgImg, charImg] = await Promise.all([
