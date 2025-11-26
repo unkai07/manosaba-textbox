@@ -1,19 +1,19 @@
 // Configuration
 const CHARACTERS = {
-    "ema": { name: "樱羽艾玛", emotion_count: 8, font: "font3.ttf" },
-    "hiro": { name: "二阶堂希罗", emotion_count: 6, font: "font3.ttf" },
-    "sherri": { name: "橘雪莉", emotion_count: 7, font: "font3.ttf" },
-    "hanna": { name: "远野汉娜", emotion_count: 5, font: "font3.ttf" },
-    "anan": { name: "夏目安安", emotion_count: 9, font: "font3.ttf" },
-    "yuki": { name: "月代雪", emotion_count: 18, font: "font3.ttf" },
-    "meruru": { name: "冰上梅露露", emotion_count: 6, font: "font3.ttf" },
-    "noa": { name: "城崎诺亚", emotion_count: 6, font: "font3.ttf" },
-    "reia": { name: "莲见蕾雅", emotion_count: 7, font: "font3.ttf" },
-    "miria": { name: "佐伯米莉亚", emotion_count: 4, font: "font3.ttf" },
-    "nanoka": { name: "黑部奈叶香", emotion_count: 5, font: "font3.ttf" },
-    "mago": { name: "宝生玛格", emotion_count: 5, font: "font3.ttf" },
-    "alisa": { name: "紫藤亚里沙", emotion_count: 6, font: "font3.ttf" },
-    "coco": { name: "泽渡可可", emotion_count: 5, font: "font3.ttf" }
+    "ema": { name: "樱羽艾玛", emotion_count: 8, font: "static/fonts/font3.ttf" },
+    "hiro": { name: "二阶堂希罗", emotion_count: 6, font: "static/fonts/font3.ttf" },
+    "sherri": { name: "橘雪莉", emotion_count: 7, font: "static/fonts/font3.ttf" },
+    "hanna": { name: "远野汉娜", emotion_count: 5, font: "static/fonts/font3.ttf" },
+    "anan": { name: "夏目安安", emotion_count: 9, font: "static/fonts/font3.ttf" },
+    "yuki": { name: "月代雪", emotion_count: 18, font: "static/fonts/font3.ttf" },
+    "meruru": { name: "冰上梅露露", emotion_count: 6, font: "static/fonts/font3.ttf" },
+    "noa": { name: "城崎诺亚", emotion_count: 6, font: "static/fonts/font3.ttf" },
+    "reia": { name: "莲见蕾雅", emotion_count: 7, font: "static/fonts/font3.ttf" },
+    "miria": { name: "佐伯米莉亚", emotion_count: 4, font: "static/fonts/font3.ttf" },
+    "nanoka": { name: "黑部奈叶香", emotion_count: 5, font: "static/fonts/font3.ttf" },
+    "mago": { name: "宝生玛格", emotion_count: 5, font: "static/fonts/font3.ttf" },
+    "alisa": { name: "紫藤亚里沙", emotion_count: 6, font: "static/fonts/font3.ttf" },
+    "coco": { name: "泽渡可可", emotion_count: 5, font: "static/fonts/font3.ttf" }
 };
 
 const TEXT_CONFIGS = {
@@ -130,7 +130,7 @@ let fontLoaded = false;
 async function init() {
     // Load font
     try {
-        const font = new FontFace('CustomFont', 'url(font3.ttf)');
+        const font = new FontFace('CustomFont', 'url(static/fonts/font3.ttf)');
         await font.load();
         document.fonts.add(font);
         fontLoaded = true;
@@ -212,8 +212,8 @@ async function generateImage() {
         currentBackground = Math.floor(Math.random() * 16) + 1;
 
         // Load images
-        const bgPath = `background/c${currentBackground}.png`;
-        const charPath = `${currentCharacter}/${currentCharacter} (${currentExpression}).png`;
+        const bgPath = `static/img/background/c${currentBackground}.png`;
+        const charPath = `static/img/${currentCharacter}/${currentCharacter} (${currentExpression}).png`;
 
         const [bgImg, charImg] = await Promise.all([
             loadImage(bgPath),
