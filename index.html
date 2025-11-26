@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔法少女的魔女裁判文本框生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>魔法少女的魔女裁判文本框生成器</h1>
+            <p>基于 <a href="https://github.com/oplivilqo/Text_box-of-mahoushoujo_no_majosaiban"
+                    target="_blank">Text_box-of-mahoushoujo_no_majosaiban</a> 的网页版</p>
+        </header>
+
+        <main>
+            <div class="controls">
+                <div class="control-group">
+                    <label for="character-select">角色选择</label>
+                    <select id="character-select">
+                        <!-- Options will be populated by JS -->
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="expression-select">表情选择</label>
+                    <div class="expression-controls">
+                        <select id="expression-select">
+                            <!-- Options will be populated by JS -->
+                        </select>
+                        <button id="random-expression-btn" title="随机表情">🎲</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="text-input">文本内容</label>
+                    <textarea id="text-input" placeholder="请输入文本..."></textarea>
+                </div>
+
+                <div class="actions">
+                    <button id="generate-btn" class="primary-btn">生成图片</button>
+                    <button id="download-btn" class="secondary-btn" disabled>下载图片</button>
+                </div>
+            </div>
+
+            <div class="preview">
+                <canvas id="preview-canvas" width="2560" height="834"></canvas>
+                <div id="loading-indicator" class="hidden">加载资源中...</div>
+            </div>
+        </main>
+
+        <footer>
+            <p>本项目仅供个人学习交流使用，不拥有相关素材的版权。</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
