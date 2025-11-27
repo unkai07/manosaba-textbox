@@ -1,19 +1,19 @@
 // Configuration
 const CHARACTERS = {
-    "ema": { name: "樱羽艾玛", emotion_count: 8, font: "static/fonts/text.woff2" },
-    "hiro": { name: "二阶堂希罗", emotion_count: 6, font: "static/fonts/text.woff2" },
-    "sherri": { name: "橘雪莉", emotion_count: 7, font: "static/fonts/text.woff2" },
-    "hanna": { name: "远野汉娜", emotion_count: 5, font: "static/fonts/text.woff2" },
-    "anan": { name: "夏目安安", emotion_count: 9, font: "static/fonts/text.woff2" },
-    "yuki": { name: "月代雪", emotion_count: 18, font: "static/fonts/text.woff2" },
-    "meruru": { name: "冰上梅露露", emotion_count: 6, font: "static/fonts/text.woff2" },
-    "noa": { name: "城崎诺亚", emotion_count: 6, font: "static/fonts/text.woff2" },
-    "reia": { name: "莲见蕾雅", emotion_count: 7, font: "static/fonts/text.woff2" },
-    "miria": { name: "佐伯米莉亚", emotion_count: 4, font: "static/fonts/text.woff2" },
-    "nanoka": { name: "黑部奈叶香", emotion_count: 5, font: "static/fonts/text.woff2" },
-    "mago": { name: "宝生玛格", emotion_count: 5, font: "static/fonts/text.woff2" },
-    "alisa": { name: "紫藤亚里沙", emotion_count: 6, font: "static/fonts/text.woff2" },
-    "coco": { name: "泽渡可可", emotion_count: 5, font: "static/fonts/text.woff2" }
+    "ema": { name: "樱羽艾玛", emotion_count: 8, font: "fonts/text.woff2" },
+    "hiro": { name: "二阶堂希罗", emotion_count: 6, font: "fonts/text.woff2" },
+    "sherri": { name: "橘雪莉", emotion_count: 7, font: "fonts/text.woff2" },
+    "hanna": { name: "远野汉娜", emotion_count: 5, font: "fonts/text.woff2" },
+    "anan": { name: "夏目安安", emotion_count: 9, font: "fonts/text.woff2" },
+    "yuki": { name: "月代雪", emotion_count: 18, font: "fonts/text.woff2" },
+    "meruru": { name: "冰上梅露露", emotion_count: 6, font: "fonts/text.woff2" },
+    "noa": { name: "城崎诺亚", emotion_count: 6, font: "fonts/text.woff2" },
+    "reia": { name: "莲见蕾雅", emotion_count: 7, font: "fonts/text.woff2" },
+    "miria": { name: "佐伯米莉亚", emotion_count: 4, font: "fonts/text.woff2" },
+    "nanoka": { name: "黑部奈叶香", emotion_count: 5, font: "fonts/text.woff2" },
+    "mago": { name: "宝生玛格", emotion_count: 5, font: "fonts/text.woff2" },
+    "alisa": { name: "紫藤亚里沙", emotion_count: 6, font: "fonts/text.woff2" },
+    "coco": { name: "泽渡可可", emotion_count: 5, font: "fonts/text.woff2" }
 };
 
 const TEXT_CONFIGS = {
@@ -149,7 +149,7 @@ let trialOptions = []; // Array of {type, text}
 async function init() {
     // Load font
     try {
-        const font = new FontFace('CustomFont', 'url(static/fonts/text.woff2)');
+        const font = new FontFace('CustomFont', 'url(fonts/text.woff2)');
         await font.load();
         document.fonts.add(font);
         fontLoaded = true;
@@ -359,8 +359,8 @@ async function generateTextBox() {
     bgNum = parseInt(currentBackground);
 
     // Load images
-    const bgPath = `static/img/textbox/background/c${bgNum}.webp`;
-    const charPath = `static/img/textbox/${currentCharacter}/${currentCharacter} (${currentExpression}).webp`;
+    const bgPath = `img/textbox/background/c${bgNum}.webp`;
+    const charPath = `img/textbox/${currentCharacter}/${currentCharacter} (${currentExpression}).webp`;
 
     const [bgImg, charImg] = await Promise.all([
         loadImage(bgPath),
@@ -389,8 +389,8 @@ async function generateAnanSays() {
     const face = ananExpressionSelect.value;
     const text = ananTextInput.value;
 
-    const basePath = `static/img/anan_says/${face}.webp`;
-    const overlayPath = `static/img/anan_says/base_overlay.webp`;
+    const basePath = `img/anan_says/${face}.webp`;
+    const overlayPath = `img/anan_says/base_overlay.webp`;
 
     const [baseImg, overlayImg] = await Promise.all([
         loadImage(basePath),
@@ -415,9 +415,9 @@ async function generateTrial() {
         text: div.querySelector('input').value
     })).filter(o => o.text); // Filter empty
 
-    const bgPath = `static/img/trial/background.webp`;
-    const charPath = `static/img/trial/${char}.webp`;
-    const blackPath = `static/img/trial/black.webp`; // Assuming we have a black bg or just fill rect
+    const bgPath = `img/trial/background.webp`;
+    const charPath = `img/trial/${char}.webp`;
+    const blackPath = `img/trial/black.webp`; // Assuming we have a black bg or just fill rect
 
     const [bgImg, charImg] = await Promise.all([
         loadImage(bgPath),
@@ -446,11 +446,11 @@ async function generateTrial() {
             const [x, y] = coords[i];
 
             // Draw option bg
-            const optBg = await loadImage(`static/img/trial/option.webp`);
+            const optBg = await loadImage(`img/trial/option.webp`);
             ctx.drawImage(optBg, x, y);
 
             // Draw statement icon
-            const icon = await loadImage(`static/img/trial/${opt.type}.webp`);
+            const icon = await loadImage(`img/trial/${opt.type}.webp`);
             ctx.drawImage(icon, x + 21, y - 43);
 
             // Draw text
