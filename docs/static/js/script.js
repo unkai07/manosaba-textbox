@@ -1,103 +1,103 @@
 // Configuration
 const CHARACTERS = {
-    "ema": { name: "樱羽艾玛", emotion_count: 8, font: "static/fonts/font3.woff2" },
-    "hiro": { name: "二阶堂希罗", emotion_count: 6, font: "static/fonts/font3.woff2" },
-    "sherri": { name: "橘雪莉", emotion_count: 7, font: "static/fonts/font3.woff2" },
-    "hanna": { name: "远野汉娜", emotion_count: 5, font: "static/fonts/font3.woff2" },
-    "anan": { name: "夏目安安", emotion_count: 9, font: "static/fonts/font3.woff2" },
-    "yuki": { name: "月代雪", emotion_count: 18, font: "static/fonts/font3.woff2" },
-    "meruru": { name: "冰上梅露露", emotion_count: 6, font: "static/fonts/font3.woff2" },
-    "noa": { name: "城崎诺亚", emotion_count: 6, font: "static/fonts/font3.woff2" },
-    "reia": { name: "莲见蕾雅", emotion_count: 7, font: "static/fonts/font3.woff2" },
-    "miria": { name: "佐伯米莉亚", emotion_count: 4, font: "static/fonts/font3.woff2" },
-    "nanoka": { name: "黑部奈叶香", emotion_count: 5, font: "static/fonts/font3.woff2" },
-    "mago": { name: "宝生玛格", emotion_count: 5, font: "static/fonts/font3.woff2" },
-    "alisa": { name: "紫藤亚里沙", emotion_count: 6, font: "static/fonts/font3.woff2" },
-    "coco": { name: "泽渡可可", emotion_count: 5, font: "static/fonts/font3.woff2" }
+    "ema": { name: "樱羽艾玛", emotion_count: 8, font: "static/fonts/text.woff2" },
+    "hiro": { name: "二阶堂希罗", emotion_count: 6, font: "static/fonts/text.woff2" },
+    "sherri": { name: "橘雪莉", emotion_count: 7, font: "static/fonts/text.woff2" },
+    "hanna": { name: "远野汉娜", emotion_count: 5, font: "static/fonts/text.woff2" },
+    "anan": { name: "夏目安安", emotion_count: 9, font: "static/fonts/text.woff2" },
+    "yuki": { name: "月代雪", emotion_count: 18, font: "static/fonts/text.woff2" },
+    "meruru": { name: "冰上梅露露", emotion_count: 6, font: "static/fonts/text.woff2" },
+    "noa": { name: "城崎诺亚", emotion_count: 6, font: "static/fonts/text.woff2" },
+    "reia": { name: "莲见蕾雅", emotion_count: 7, font: "static/fonts/text.woff2" },
+    "miria": { name: "佐伯米莉亚", emotion_count: 4, font: "static/fonts/text.woff2" },
+    "nanoka": { name: "黑部奈叶香", emotion_count: 5, font: "static/fonts/text.woff2" },
+    "mago": { name: "宝生玛格", emotion_count: 5, font: "static/fonts/text.woff2" },
+    "alisa": { name: "紫藤亚里沙", emotion_count: 6, font: "static/fonts/text.woff2" },
+    "coco": { name: "泽渡可可", emotion_count: 5, font: "static/fonts/text.woff2" }
 };
 
 const TEXT_CONFIGS = {
     "nanoka": [
-        { text: "黑", position: [759, 63], font_color: "rgb(131,143,147)", font_size: 196 },
-        { text: "部", position: [955, 175], font_color: "rgb(255, 255, 255)", font_size: 92 },
-        { text: "奈", position: [1053, 117], font_color: "rgb(255, 255, 255)", font_size: 147 },
-        { text: "叶香", position: [1197, 175], font_color: "rgb(255, 255, 255)", font_size: 92 }
+        { text: "黑", position: [759, 103], font_color: "rgb(131,143,147)", font_size: 196 },
+        { text: "部", position: [955, 215], font_color: "rgb(255, 255, 255)", font_size: 92 },
+        { text: "奈", position: [1053, 157], font_color: "rgb(255, 255, 255)", font_size: 147 },
+        { text: "叶香", position: [1197, 215], font_color: "rgb(255, 255, 255)", font_size: 92 }
     ],
     "hiro": [
-        { text: "二", position: [759, 63], font_color: "rgb(239,79,84)", font_size: 196 },
-        { text: "阶堂", position: [955, 175], font_color: "rgb(255, 255, 255)", font_size: 92 },
-        { text: "希", position: [1143, 110], font_color: "rgb(255, 255, 255)", font_size: 147 },
-        { text: "罗", position: [1283, 175], font_color: "rgb(255, 255, 255)", font_size: 92 }
+        { text: "二", position: [759, 103], font_color: "rgb(239,79,84)", font_size: 196 },
+        { text: "阶堂", position: [955, 215], font_color: "rgb(255, 255, 255)", font_size: 92 },
+        { text: "希", position: [1143, 150], font_color: "rgb(255, 255, 255)", font_size: 147 },
+        { text: "罗", position: [1283, 215], font_color: "rgb(255, 255, 255)", font_size: 92 }
     ],
     "ema": [
-        { text: "樱", position: [759, 73], font_color: "rgb(253,145,175)", font_size: 186 },
-        { text: "羽", position: [949, 175], font_color: "rgb(255, 255, 255)", font_size: 92 },
-        { text: "艾", position: [1039, 117], font_color: "rgb(255, 255, 255)", font_size: 147 },
-        { text: "玛", position: [1183, 175], font_color: "rgb(255, 255, 255)", font_size: 92 }
+        { text: "樱", position: [759, 113], font_color: "rgb(253,145,175)", font_size: 186 },
+        { text: "羽", position: [949, 215], font_color: "rgb(255, 255, 255)", font_size: 92 },
+        { text: "艾", position: [1039, 157], font_color: "rgb(255, 255, 255)", font_size: 147 },
+        { text: "玛", position: [1183, 215], font_color: "rgb(255, 255, 255)", font_size: 92 }
     ],
     "sherri": [
-        { text: "橘", position: [759, 73], font_color: "rgb(137,177,251)", font_size: 186 },
-        { text: "雪", position: [943, 110], font_color: "rgb(255, 255, 255)", font_size: 147 },
-        { text: "莉", position: [1093, 175], font_color: "rgb(255, 255, 255)", font_size: 92 }
+        { text: "橘", position: [759, 113], font_color: "rgb(137,177,251)", font_size: 186 },
+        { text: "雪", position: [943, 150], font_color: "rgb(255, 255, 255)", font_size: 147 },
+        { text: "莉", position: [1093, 215], font_color: "rgb(255, 255, 255)", font_size: 92 }
     ],
     "anan": [
-        { text: "夏", position: [759, 73], font_color: "rgb(159,145,251)", font_size: 186 },
-        { text: "目", position: [949, 175], font_color: "rgb(255, 255, 255)", font_size: 92 },
-        { text: "安", position: [1039, 117], font_color: "rgb(255, 255, 255)", font_size: 147 },
-        { text: "安", position: [1183, 175], font_color: "rgb(255, 255, 255)", font_size: 92 }
+        { text: "夏", position: [759, 113], font_color: "rgb(159,145,251)", font_size: 186 },
+        { text: "目", position: [949, 215], font_color: "rgb(255, 255, 255)", font_size: 92 },
+        { text: "安", position: [1039, 157], font_color: "rgb(255, 255, 255)", font_size: 147 },
+        { text: "安", position: [1183, 215], font_color: "rgb(255, 255, 255)", font_size: 92 }
     ],
     "noa": [
-        { text: "城", position: [759, 73], font_color: "rgb(104,223,231)", font_size: 186 },
-        { text: "崎", position: [945, 175], font_color: "rgb(255, 255, 255)", font_size: 92 },
-        { text: "诺", position: [1042, 117], font_color: "rgb(255, 255, 255)", font_size: 147 },
-        { text: "亚", position: [1186, 175], font_color: "rgb(255, 255, 255)", font_size: 92 }
+        { text: "城", position: [759, 113], font_color: "rgb(104,223,231)", font_size: 186 },
+        { text: "崎", position: [945, 215], font_color: "rgb(255, 255, 255)", font_size: 92 },
+        { text: "诺", position: [1042, 157], font_color: "rgb(255, 255, 255)", font_size: 147 },
+        { text: "亚", position: [1186, 215], font_color: "rgb(255, 255, 255)", font_size: 92 }
     ],
     "coco": [
-        { text: "泽", position: [759, 73], font_color: "rgb(251,114,78)", font_size: 186 },
-        { text: "渡", position: [945, 175], font_color: "rgb(255, 255, 255)", font_size: 92 },
-        { text: "可", position: [1042, 117], font_color: "rgb(255, 255, 255)", font_size: 147 },
-        { text: "可", position: [1186, 175], font_color: "rgb(255, 255, 255)", font_size: 92 }
+        { text: "泽", position: [759, 113], font_color: "rgb(251,114,78)", font_size: 186 },
+        { text: "渡", position: [945, 215], font_color: "rgb(255, 255, 255)", font_size: 92 },
+        { text: "可", position: [1042, 157], font_color: "rgb(255, 255, 255)", font_size: 147 },
+        { text: "可", position: [1186, 215], font_color: "rgb(255, 255, 255)", font_size: 92 }
     ],
     "alisa": [
-        { text: "紫", position: [759, 73], font_color: "rgb(235,75,60)", font_size: 186 },
-        { text: "藤", position: [945, 175], font_color: "rgb(255, 255, 255)", font_size: 92 },
-        { text: "亚", position: [1042, 117], font_color: "rgb(255, 255, 255)", font_size: 147 },
-        { text: "里沙", position: [1186, 175], font_color: "rgb(255, 255, 255)", font_size: 92 }
+        { text: "紫", position: [759, 113], font_color: "rgb(235,75,60)", font_size: 186 },
+        { text: "藤", position: [945, 215], font_color: "rgb(255, 255, 255)", font_size: 92 },
+        { text: "亚", position: [1042, 157], font_color: "rgb(255, 255, 255)", font_size: 147 },
+        { text: "里沙", position: [1186, 215], font_color: "rgb(255, 255, 255)", font_size: 92 }
     ],
     "reia": [
-        { text: "莲", position: [759, 73], font_color: "rgb(253,177,88)", font_size: 186 },
-        { text: "见", position: [945, 175], font_color: "rgb(255, 255, 255)", font_size: 92 },
-        { text: "蕾", position: [1042, 117], font_color: "rgb(255, 255, 255)", font_size: 147 },
-        { text: "雅", position: [1186, 175], font_color: "rgb(255, 255, 255)", font_size: 92 }
+        { text: "莲", position: [759, 113], font_color: "rgb(253,177,88)", font_size: 186 },
+        { text: "见", position: [945, 215], font_color: "rgb(255, 255, 255)", font_size: 92 },
+        { text: "蕾", position: [1042, 157], font_color: "rgb(255, 255, 255)", font_size: 147 },
+        { text: "雅", position: [1186, 215], font_color: "rgb(255, 255, 255)", font_size: 92 }
     ],
     "mago": [
-        { text: "宝", position: [759, 73], font_color: "rgb(185,124,235)", font_size: 186 },
-        { text: "生", position: [945, 175], font_color: "rgb(255, 255, 255)", font_size: 92 },
-        { text: "玛", position: [1042, 117], font_color: "rgb(255, 255, 255)", font_size: 147 },
-        { text: "格", position: [1186, 175], font_color: "rgb(255, 255, 255)", font_size: 92 }
+        { text: "宝", position: [759, 113], font_color: "rgb(185,124,235)", font_size: 186 },
+        { text: "生", position: [945, 215], font_color: "rgb(255, 255, 255)", font_size: 92 },
+        { text: "玛", position: [1042, 157], font_color: "rgb(255, 255, 255)", font_size: 147 },
+        { text: "格", position: [1186, 215], font_color: "rgb(255, 255, 255)", font_size: 92 }
     ],
     "hanna": [
-        { text: "远", position: [759, 73], font_color: "rgb(169,199,30)", font_size: 186 },
-        { text: "野", position: [945, 175], font_color: "rgb(255, 255, 255)", font_size: 92 },
-        { text: "汉", position: [1042, 117], font_color: "rgb(255, 255, 255)", font_size: 147 },
-        { text: "娜", position: [1186, 175], font_color: "rgb(255, 255, 255)", font_size: 92 }
+        { text: "远", position: [759, 113], font_color: "rgb(169,199,30)", font_size: 186 },
+        { text: "野", position: [945, 215], font_color: "rgb(255, 255, 255)", font_size: 92 },
+        { text: "汉", position: [1042, 157], font_color: "rgb(255, 255, 255)", font_size: 147 },
+        { text: "娜", position: [1186, 215], font_color: "rgb(255, 255, 255)", font_size: 92 }
     ],
     "meruru": [
-        { text: "冰", position: [759, 73], font_color: "rgb(227,185,175)", font_size: 186 },
-        { text: "上", position: [945, 175], font_color: "rgb(255, 255, 255)", font_size: 92 },
-        { text: "梅", position: [1042, 117], font_color: "rgb(255, 255, 255)", font_size: 147 },
-        { text: "露露", position: [1186, 175], font_color: "rgb(255, 255, 255)", font_size: 92 }
+        { text: "冰", position: [759, 113], font_color: "rgb(227,185,175)", font_size: 186 },
+        { text: "上", position: [945, 215], font_color: "rgb(255, 255, 255)", font_size: 92 },
+        { text: "梅", position: [1042, 157], font_color: "rgb(255, 255, 255)", font_size: 147 },
+        { text: "露露", position: [1186, 215], font_color: "rgb(255, 255, 255)", font_size: 92 }
     ],
     "miria": [
-        { text: "佐", position: [759, 73], font_color: "rgb(235,207,139)", font_size: 186 },
-        { text: "伯", position: [945, 175], font_color: "rgb(255, 255, 255)", font_size: 92 },
-        { text: "米", position: [1042, 117], font_color: "rgb(255, 255, 255)", font_size: 147 },
-        { text: "莉亚", position: [1186, 175], font_color: "rgb(255, 255, 255)", font_size: 92 }
+        { text: "佐", position: [759, 113], font_color: "rgb(235,207,139)", font_size: 186 },
+        { text: "伯", position: [945, 215], font_color: "rgb(255, 255, 255)", font_size: 92 },
+        { text: "米", position: [1042, 157], font_color: "rgb(255, 255, 255)", font_size: 147 },
+        { text: "莉亚", position: [1186, 215], font_color: "rgb(255, 255, 255)", font_size: 92 }
     ],
     "yuki": [
-        { text: "月", position: [759, 63], font_color: "rgb(195,209,231)", font_size: 196 },
-        { text: "代", position: [948, 175], font_color: "rgb(255, 255, 255)", font_size: 92 },
-        { text: "雪", position: [1053, 117], font_color: "rgb(255, 255, 255)", font_size: 147 }
+        { text: "月", position: [759, 103], font_color: "rgb(195,209,231)", font_size: 196 },
+        { text: "代", position: [948, 215], font_color: "rgb(255, 255, 255)", font_size: 92 },
+        { text: "雪", position: [1053, 157], font_color: "rgb(255, 255, 255)", font_size: 147 }
     ]
 };
 
@@ -149,7 +149,7 @@ let trialOptions = []; // Array of {type, text}
 async function init() {
     // Load font
     try {
-        const font = new FontFace('CustomFont', 'url(static/fonts/font3.woff2)');
+        const font = new FontFace('CustomFont', 'url(static/fonts/text.woff2)');
         await font.load();
         document.fonts.add(font);
         fontLoaded = true;
@@ -251,7 +251,7 @@ async function init() {
             const link = document.createElement('a');
             let filename = 'image';
             if (currentTab === 'textbox') filename = `${currentCharacter}_${Date.now()}`;
-            else if (currentTab === 'anansays') filename = `anan_${Date.now()}`;
+            else if (currentTab === 'anansays') filename = `anan_says_${Date.now()}`;
             else if (currentTab === 'trial') filename = `trial_${Date.now()}`;
 
             link.download = `${filename}.png`;
@@ -644,13 +644,19 @@ function drawCharacterName() {
 
         ctx.font = `${item.font_size}px CustomFont`;
 
-        // Shadow
-        ctx.fillStyle = 'black';
-        ctx.fillText(item.text, item.position[0] + 2, item.position[1] + 2);
+        ctx.shadowColor = 'black';
+        ctx.shadowOffsetX = 4;
+        ctx.shadowOffsetY = 4;
+        ctx.shadowBlur = 0; // For a sharp shadow like the original offset
 
-        // Main text
         ctx.fillStyle = item.font_color;
         ctx.fillText(item.text, item.position[0], item.position[1]);
+
+        // Reset shadow properties to avoid affecting subsequent drawings
+        ctx.shadowColor = 'transparent';
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+        ctx.shadowBlur = 0;
     });
 }
 
@@ -704,13 +710,20 @@ function drawMainText(text) {
         const segments = parseColorSegments(line, bracketColor, color);
 
         segments.forEach(seg => {
-            // Shadow
-            ctx.fillStyle = 'black';
-            ctx.fillText(seg.text, lineX + 4, startY + index * lineHeight + 4);
+            ctx.shadowColor = 'black';
+            ctx.shadowOffsetX = 4;
+            ctx.shadowOffsetY = 4;
+            ctx.shadowBlur = 0; // No blur for a hard shadow
 
             // Text
             ctx.fillStyle = seg.color;
             ctx.fillText(seg.text, lineX, startY + index * lineHeight);
+
+            // Reset shadow properties to avoid affecting subsequent draws
+            ctx.shadowColor = 'rgba(0, 0, 0, 0)';
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            ctx.shadowBlur = 0;
 
             lineX += ctx.measureText(seg.text).width;
         });

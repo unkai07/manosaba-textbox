@@ -10,7 +10,7 @@
 
 @font-face {
     font-family: 'CustomFont';
-    src: url('../fonts/font3.woff2') format('woff2');
+    src: url('../fonts/text.woff2') format('woff2');
 }
 
 * {
@@ -60,6 +60,7 @@ header {
 header h1 {
     color: var(--primary-color);
     margin-bottom: 10px;
+    font-family: 'CustomFont';
 }
 
 main {
@@ -91,6 +92,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin-top: 10px;
 }
 
 label {
@@ -157,10 +159,16 @@ button:disabled {
     font-size: 20px;
 }
 
+#random-background-btn {
+    background-color: #eee;
+    color: #333;
+    padding: 0 15px;
+    font-size: 20px;
+}
+
 .actions {
     display: flex;
     gap: 10px;
-    margin-top: 10px;
 }
 
 .preview {
@@ -172,7 +180,7 @@ button:disabled {
     border-radius: var(--border-radius);
     padding: 20px;
     position: relative;
-    min-height: 400px;
+    min-height: 455px;
     overflow: hidden;
 }
 
