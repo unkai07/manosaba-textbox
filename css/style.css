@@ -277,3 +277,88 @@ footer {
     font-size: 0.9em;
     color: #888;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+        max-width: 80%;
+    }
+
+    .text-muted {
+        font-size: 14px;
+        max-width: 80%;
+    }
+
+    .controls {
+        min-width: auto;
+        /* Allow shrinking below 300px */
+    }
+
+    .tabs {
+        gap: 5px;
+    }
+
+    .tab-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+        flex: 1 1 auto;
+        /* Allow growing and shrinking */
+        text-align: center;
+    }
+
+    .option-item {
+        flex-wrap: wrap;
+    }
+
+    .option-item select {
+        width: 100%;
+        /* Full width on mobile */
+        flex: 1 1 100%;
+    }
+
+    .option-item input {
+        width: calc(100% - 40px);
+        /* Leave space for remove button */
+        flex: 1 1 auto;
+    }
+
+    .remove-option-btn {
+        padding: 10px;
+        /* Larger touch target */
+    }
+
+    .expression-controls {
+        flex-wrap: wrap;
+    }
+
+    .preview {
+        min-height: 100px;
+        order: 2;
+    }
+
+    /* Reorder layout: Controls -> Preview -> Actions */
+    .controls {
+        display: contents;
+        /* Remove controls wrapper from layout flow */
+    }
+
+    .actions {
+        order: 3;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Ensure tab content appears first */
+    .tab-content {
+        order: 1;
+    }
+}
